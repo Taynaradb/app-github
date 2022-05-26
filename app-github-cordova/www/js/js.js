@@ -1,38 +1,90 @@
-function perfil(){
+let usuarios = ['gutoffline', 'taynaradb', 'SantiagoVinicius'];
 
-    $.ajax({
-        type: 'GET',
-        url: `https://api.github.com/users/gutoffline`,
-        success: (function(user){
+function perfil(){
+    function imprimir(usuarios){
+        $.ajax({
+            type: 'GET',
+            url: `https://api.github.com/users/${usuarios}`,
+            success: (function(user){
             console.log(user)
             let avatar = user.avatar_url;
             let login = user.login;
             let blog = user.blog;
             let twitter = user.twitter_username;
-            let git = user.url;
+            let git = user.html_url;
             let company = user.company;
-           console.log( login );
 
-           $('#userpic').attr({src: avatar, alt: login });
-           $('#user').text(login);
-           $('#company').text(company);
-           $('#twitter').attr('href','https://twitter.com/'+twitter);
-           $('#git').attr('href', git);
-           $('#blog').attr('href', blog);
+            $('#userpic').attr({src: avatar, alt: login });
+            $('#user').text(login);
+            $('#company').text(company);
+            $('#twitter').attr('href','https://twitter.com/'+twitter);
+            $('#git').attr('href', git);
+            $('#blog').attr('href', blog);
+            })
         })
-    })
+    };
+    usuarios.forEach(imprimir);
 };
 
 //document.querySelector('#pesquisar');
 window.addEventListener('load',function(){
-    perfil();
+  perfil();
 });
 
-/*
-login
-avatar_url
-bio
-blog
-twitter_username
-url
-*/
+
+
+/*usuarios = ['gutoffline', 'taynaradb', 'SantiagoVinicius', 'MoreiraJulia'];
+
+
+
+function BuscarGithub(){
+
+function imprimir(individual) {
+
+    $.ajax({
+
+        type: "GET",
+
+        url: 'https://api.github.com/users/' + individual,
+
+         success: (function(user){
+
+             console.log(user)
+
+             let nome = user.name
+
+             let login = user.login
+
+             let foto = user.avatar_url
+
+             let twitter = user.twitter_username
+
+             let github = user.url
+
+             let medium = user.blog
+
+             let instuicao = user.company
+
+             let pais = user.location
+
+             document.getElementById("informacao-completo").innerHTML += `<div class=""><div class="col-md-5"><img src="${foto}" width="150"></div> <div class="col-md-7"> ${nome} (${login}) <br> <a href="${twitter}"><i class="bi bi-twitter"></i></a> <a href="${github}"><i class="bi bi-github" width="100"></i></a> <a href="${medium}"><i class="bi bi-medium"></i></a> <br> ${instuicao} - ${pais}</div>`
+
+        })
+
+    })
+
+}
+
+
+
+usuarios.forEach(imprimir);
+
+}
+
+
+
+document.getElementById("buscar").addEventListener("click", function() {
+
+    BuscarGithub();
+
+})*/
